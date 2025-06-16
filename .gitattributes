@@ -1,2 +1,5 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+git add photos/
+git commit -m "Adaugă folderul photos cu imaginile site-ului"
+git push origin main
