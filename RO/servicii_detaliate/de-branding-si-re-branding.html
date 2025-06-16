@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>De-branding si re-branding - SIM Logistics Limited</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Sora', sans-serif;
+      color: #fff;
+      background: #000;
+      box-sizing: border-box;
+    }
+        body {
+    overflow-x: hidden;
+    }
+    .hero {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      min-height: 600px;
+      background: url('../../photos/De-branding_Re-branding/3.jpg') center center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.3);
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      background: rgba(36,36,36, 0.5);
+      border-radius: 24px;
+      border: 2px solid rgba(255,255,255,0.3);
+      padding: 2.8rem 2.8rem;
+      max-width: 900px;
+      text-align: left;
+      box-shadow: 0 8px 32px 0 rgba(0,0,0,0.30);
+      backdrop-filter: blur(1px);
+    }
+    .hero-content h1 {
+      font-size: 2.7rem;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+    }
+        .hero-content p {
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin-bottom: 2.2rem;
+      line-height: 1.3;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 0.1rem;
+    }
+    .hero-buttons a {
+      text-decoration: none;
+      font-size: 1.4rem;
+      font-weight: 500;
+      padding: 0.4rem 0.9rem;
+      border-radius: 12px;
+      border: none;
+      outline: none;
+      transition: background 0.2s, color 0.2s;
+      cursor: pointer;
+      display: inline-block;
+    }
+    .hero-buttons .about {
+      background: #a0416b;
+      color: #fff;
+    }
+    .hero-buttons .contact {
+      background: #fff;
+      color: #1a1a1a;
+      margin-left: 10px;
+    }
+    .hero-buttons a:hover {
+      opacity: 0.9;
+      box-shadow: 0 0 8px #fff4;
+    }
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 1rem 3vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+      transition: background-color 0.3s ease;
+      border-bottom: 1px solid white;
+    }
+    .navbar.scrolled {
+  background-color: rgba(0, 0, 0, 1);
+}
+    .navbar h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+           .navbar nav {
+      display: flex;
+      align-items: center;
+    }
+    .navbar nav a {
+      margin-left: 2rem;
+      color: white;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+    .navbar nav a.active {
+      color: #e4f754;
+    }
+    .lang-select {
+      margin-left: 2rem;
+    }
+    .lang-select select {
+      background-color: #222;
+      color: white;
+      border: none;
+      padding: 0.3rem 0.6rem;
+      border-radius: 6px;
+      font-family: 'Sora', sans-serif;
+      font-size: 0.7rem;
+    }
+        .mobile-nav {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.95);
+      position: fixed;
+      top: 58px;
+      left: 0;
+      width: 100vw;
+      padding: 1.5rem 5vw 2rem;
+      gap: 1.2rem;
+      z-index: 9;
+    }
+    .mobile-nav.show {
+      display: flex !important;
+    }
+    .mobile-nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.1rem;
+    }
+    .mobile-nav select {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background-color: #222;
+      color: white;
+      border: none;
+      padding: 0.5rem 0.8rem;
+      border-radius: 8px;
+      font-family: 'Sora', sans-serif;
+      font-size: 0.9rem;
+    }
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+      margin-left: auto;
+    }
+    .menu-toggle div {
+      width: 25px;
+      height: 3px;
+      background-color: white;
+    }
+.slide-up-reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s cubic-bezier(.6,.4,0,1), transform 0.7s cubic-bezier(.6,.4,0,1);
+}
+.slide-up-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.text-link::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0; right: 0; bottom: -2px;
+  height: 2px;
+  background: #fff;
+  transform: scaleX(0);
+  transition: transform 0.2s;
+}
+a:hover .text-link::after,
+a:focus .text-link::after {
+  transform: scaleX(1);
+}
+.underline-link {
+  position: relative;
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.2s;
+  display: inline-block;
+}
+.underline-link::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0; right: 0; bottom: -2px;
+  height: 2px;
+  background: #fff;
+  transform: scaleX(0);
+  transition: transform 0.2s;
+}
+.underline-link:hover::after,
+.underline-link:focus::after {
+  transform: scaleX(1);
+}
+@media (max-width: 850px) {
+  footer {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 2.1rem 0 !important;
+    padding: 2rem 2vw 1.2rem 2vw !important;
+    font-size: 0.99rem !important;
+  }
+  footer > div {
+    max-width: 98vw !important;
+    min-width: 0 !important;
+    text-align: center !important;
+    margin-bottom: 1.3rem !important;
+  }
+  footer h2 {
+    text-align: center !important;
+  }
+  footer .footer-services-list,
+  footer > div:nth-child(2) > div {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+  }
+  /* Pentru contact și legal la un loc, se separă vizual: */
+  footer > div:last-child {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+  .footer-copyright {
+    font-size: 0.96rem !important;
+    padding: 0.9rem 2vw !important;
+  }
+}
+  @media (max-width: 768px) {
+          html, body {
+      width: 100%;
+      max-width: 100vw;
+      overflow-x: hidden;
+      }
+      .navbar nav { display: none; }
+      .menu-toggle { display: flex; }
+      .navbar { padding: 1rem 1rem; }
+      .navbar h1 { font-size: 1.2rem; }
+      .hero-content {
+        padding: 1.5rem 1rem 1.5rem 1rem;
+        max-width: 98vw;
+      }
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      .hero-content p {
+        font-size: 1.07rem;
+      }
+      .hero-buttons a {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+      }
+  }
+  </style>
+</head>
+<body>
+ <header class="navbar">
+    <h1>SIM Logistics Limited</h1>
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <nav>
+      <a href="../acasa.html">Acasă</a>
+      <a href="../despre.html">Despre noi</a>
+      <a href="../servicii.html" class="active">Servicii</a>
+      <a href="../contact.html">Contact</a>
+      <span class="lang-select">
+        <select onchange="location = this.value">
+          <option value="index.html" selected>RO</option>
+          <option value="en.html">EN</option>
+        </select>
+      </span>
+    </nav>
+  </header>
+  <div class="mobile-nav">
+    <a href="../acasa.html">Acasă</a>
+    <a href="../despre.html">Despre noi</a>
+    <a href="../servicii.html" class="active">Servicii</a>
+    <a href="../contact.html">Contact</a>
+    <select onchange="location = this.value">
+      <option value="index.html" selected>RO</option>
+      <option value="en.html">EN</option>
+    </select>
+  </div>
+<main>
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>De-branding și Re-branding</h1>
+      <p>De-brandingul sau re-brandingul este o modalitate eficientă de a actualiza și de a revitaliza liniile de produse care au devenit învechite sau care sunt în surplus față de necesități.</p>
+      <div class="hero-buttons">
+        <a href="../despre.html" class="about">Despre noi</a>
+        <a href="../contact.html" class="contact">Contact</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTIUNEA PRINCIPALA -->
+  <section style="background-color: white; width: 100vw; display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 2rem; padding: 2rem 0;">
+    <div style="max-width: 1200px; width: 100%; display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 2rem; padding: 0 1rem;">
+      <!-- Col stânga -->
+      <div style="flex: 1 1 350px; min-width: 300px; max-width: 600px;">
+        <h2 style="color: #9e2354; font-size: 2.4rem; font-weight: 700; margin-bottom: 1.2rem;">Ce este de-brandingul și re-brandingul?</h2>
+        <p style="color: #000000; margin-bottom: 2.4rem;font-size: 1.1rem;">
+          De-brandingul presupune eliminarea efectivă a elementelor de brand de pe un anumit produs, iar re-brandingul presupune adăugarea unui nou brand asupra acestuia.<br><br>
+          Acest serviciu este util atunci când liniile de produse devin învechite sau când se lansează un nou brand. Refolosind produse existente prin de-branding sau re-branding, puteți evita risipa costisitoare.<br><br>
+          Cea mai des întâlnită metodă de de-branding este îndepărtarea ambalajului și etichetelor vechi și adăugarea de ambalaje și etichete noi. Relipirea etichetelor permite adăugarea de branding nou, informații suplimentare și orice detalii suplimentare necesare pentru a oferi produsului o nouă viață într-un mod eficient și economic.
+        </p>
+        <button style="background: #9e2354; color: #fff; padding: 0.7rem 1.7rem; border: none; border-radius: 8px; font-size: 1.2rem; margin-bottom: 2rem; cursor: pointer;">Contactează-ne</button>
+        <h3 style="color: #9e2354; font-size: 1.3rem; margin-bottom: 0.8rem; margin-top: 0.2rem;">De ce să apelezi la de-branding și re-branding pentru produsele tale?</h3>
+        <p style="color: #000000; line-height: 2.1rem; font-size: 1.1rem;">
+          Nicio linie de produse nu durează la nesfârșit. Uneori produsele devin învechite sau în surplus, rămânând cu brandingul vechi de care nu mai ai nevoie.<br><br>
+          De-brandingul sau re-brandingul este o soluție rentabilă de a actualiza și revigora linia ta de produse, fără a o irosi.<br><br>
+          Astfel, în loc să renunți definitiv la produse, le poți da un nou început, economisind timp și bani.
+        </p>
+      </div>
+
+      <!-- Col dreapta -->
+      <div style="flex: 1 1 350px; min-width: 300px; max-width: 600px;">
+        <img src="../../photos/De-branding_Re-branding/4.jpg" alt="Echipa de Re-branding" style="width: 100%; border-radius: 10px; margin-bottom: 7rem;">
+        <h3 style="color: #9e2354; font-size: 1.3rem; font-weight: 600; margin-bottom: 1rem;">Ce presupune serviciul de re-branding?</h3>
+        <p style="color: #000000; margin-bottom: 1rem;font-size: 1.1rem;">
+          Te putem ajuta cu de-branding și re-branding prin eliminarea ambalajelor și etichetelor existente și înlocuirea acestora cu unele noi.<br>
+          Putem re-eticheta sau suprapune etichete noi peste cele existente, folosind materiale de înaltă calitate și adezivi potriviți pentru ca etichetele să fie aplicate clar și corect.<br>
+          <br>
+          Putem oferi servicii suplimentare pentru re-branding, inclusiv:
+        </p>
+        <ul style="color: #000000; margin-left: 1.3rem; font-size: 1.1rem; line-height: 1.7;">
+          <li>Servicii de pick and pack pentru noi oferte, promoții, seturi cadou sau combinații de produse</li>
+          <li>Ambalare manuală pentru produse delicate sau fragile după re-branding</li>
+          <li>Inserare de pliante pentru mesaje suplimentare legate de re-branding</li>
+          <li>Reambalare pentru pachete promoționale și alte produse</li>
+          <li>Personalizare de produs, dacă este nevoie</li>
+          <li>Servicii de securizare a ambalajelor: etichete de siguranță, benzi adezive speciale, taguri și cutii cu protecție</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTIUNE INFORMATIVA -->
+  <section style="background-color: #f0f0f0; width: 100vw; display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 2rem; padding: 2rem 0;">
+    <div style="max-width: 1200px; width: 100%; display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 2rem; padding: 0 1rem;">
+      <!-- Col stânga -->
+      <div style="flex: 1 1 350px; min-width: 300px; max-width: 600px;">
+        <h2 style="color: #172035; font-size: 2rem; font-weight: 700; margin-bottom: 1.2rem;">De ce să alegi SIM Logistics pentru de-branding și re-branding?</h2>
+        <p style="color: #000000; margin-bottom: 2.4rem; line-height: 2.05rem;font-size: 1.1rem;">
+          SIM Logistics are ani de experiență în lucrul cu clienți din diverse sectoare, ajutându-i să elimine brandingul vechi și să aplice ambalaje și etichete noi, rapid și eficient.<br><br>
+          Dispunem de echipamente de înaltă calitate pentru ca produsele să rămână în condiție perfectă pe tot parcursul procesului de de-branding și re-branding, cu un aspect final profesional și impecabil.<br><br>
+          Echipa noastră poate gestiona toate etapele procesului, de la re-eticheta până la adăugarea de materiale suplimentare și reambalare, asigurându-ne că produsul tău ajunge rapid pe piață exact cum ai nevoie.<br><br>
+          Avem capacitatea, spațiul și personalul pentru a asigura termene scurte de execuție, astfel încât produsele să fie indisponibile doar minimul necesar și să fie repuse în circulație cât mai repede, fără costuri suplimentare inutile.
+        </p>
+        <p style="font-size: 1.1rem ;font-weight: 700; color: #172035;; margin-bottom: 1.2rem;">
+          Dacă ai nevoie de servicii de de-branding sau re-branding ca parte a soluției tale de ambalare la contract, contactează SIM Logistics astăzi.
+        </p>
+      </div>
+
+      <!-- Col dreapta -->
+      <div style="flex: 1 1 350px; min-width: 300px; max-width: 600px;">
+        <img src="../../photos/De-branding_Re-branding/1.jpg" alt="De-branding și Re-branding" style="width: 100%; border-radius: 10px; margin-bottom: 1.5rem;">
+        <h3 style="color: #172035; font-size: 2rem; font-weight: 600; margin-bottom: 1rem;">Contactează-ne</h3>
+        <p style="color: #000000; margin-bottom: 1rem; font-size: 1.1rem;">
+          La SIM Logistics înțelegem că fiecare client are cerințe specifice, așa că nu oferim soluții standardizate. Indiferent dacă ai nevoie de ambalare la contract, de-branding, re-branding, împachetare cadouri sau alte servicii personalizate, adaptăm întotdeauna soluția după necesitățile afacerii tale.<br><br>
+          Scopul nostru este ca produsele să fie ambalate și livrate impecabil, la timp și exact așa cum îți dorești.<br><br>
+          Nu ezita să contactezi echipa noastră de vânzări pentru a discuta soluția optimă pentru afacerea ta.
+        </p>
+        <a href="../contact.html" style="display: inline-block; background: #9e2354; color: #fff; padding: 0.7rem 1.7rem; border: none; border-radius: 8px; font-size: 1.2rem; margin-top: 0.3rem; cursor: pointer; text-decoration: none;">Contactează-ne</a>
+      </div>
+    </div>
+  </section>
+</main>
+      <footer style="
+  width: 100vw;
+  background: #000;
+  color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem 0 1.7rem 0;
+  gap: 0 2.5vw;
+  border-top: 1px solid #fff;
+  box-sizing: border-box;
+  font-family: 'Sora', Arial, sans-serif;
+  font-size: 1rem;
+">
+  <!-- Col 1: Adresă -->
+  <div style="flex: 1 1 250px; min-width: 200px; max-width: 350px; text-align: center;">
+    <h2 style="font-size: 1.13rem; font-weight: 700; margin-bottom: 0.7rem;">SIM Logistics Limited</h2>
+    <p style="line-height: 1.7; font-size: 0.97rem; margin-bottom: 1.1rem;">
+      Mun. Botoșani, Calea Națională nr. 144, Centrul de Microproducție<br>
+      al Incubatorului de Afaceri U1-B6, U1-B7, U1-B8, jud. Botoșani, cod poștal: 710370
+    </p>
+    <p style="margin-top: 1.8rem; font-size: 0.97rem;">C.U.I. RO 44778595, COD CAEN 8292<br>Registrul Comerțului J7/624/2021</p>
+  </div>
+
+  <!-- Col 2: Servicii -->
+  <div style="flex: 2 1 420px; min-width: 300px; max-width: 500px; text-align: center;">
+  <h2 style="font-size: 1.13rem; font-weight: 700; margin-bottom: 0.7rem;">Serviciile noastre</h2>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.1rem 2.2rem;">
+    <a href="contract-de-ambalare.html" style="display: flex; align-items: center; color: #fff; text-decoration: none; font-size: 0.99rem; margin: 2px 0;">
+      <svg width="13" height="13" style="margin-right: 0.5rem;"><circle cx="6.5" cy="6.5" r="6.5" fill="#172035"/><polygon points="5,4 10,6.5 5,9" fill="#fff"/></svg>
+      <span class="text-link" style="position: relative; display: inline-block;">Contract de ambalare</span>
+    </a>
+    <a href="ambalare-cosmetica.html" style="display: flex; align-items: center; color: #fff; text-decoration: none; font-size: 0.99rem; margin: 2px 0;">
+      <svg width="13" height="13" style="margin-right: 0.5rem;"><circle cx="6.5" cy="6.5" r="6.5" fill="#172035"/><polygon points="5,4 10,6.5 5,9" fill="#fff"/></svg>
+      <span class="text-link" style="position: relative; display: inline-block;">Ambalare cosmetice</span>
+    </a>
+    <a href="etichetare-produse.html" style="display: flex; align-items: center; color: #fff; text-decoration: none; font-size: 0.99rem; margin: 2px 0;">
+      <svg width="13" height="13" style="margin-right: 0.5rem;"><circle cx="6.5" cy="6.5" r="6.5" fill="#172035"/><polygon points="5,4 10,6.5 5,9" fill="#fff"/></svg>
+      <span class="text-link" style="position: relative; display: inline-block;">Etichetare produse</span>
+    </a>
+    <a href="Asamblare-kituri-POS.html" style="display: flex; align-items: center; color: #fff; text-decoration: none; font-size: 0.99rem; margin: 2px 0;">
+      <svg width="13" height="13" style="margin-right: 0.5rem;"><circle cx="6.5" cy="6.5" r="6.5" fill="#172035"/><polygon points="5,4 10,6.5 5,9" fill="#fff"/></svg>
+      <span class="text-link" style="position: relative; display: inline-block;">Asamblare kituri POS</span>
+    </a>
+    <a href="ambalare-securizata.html" style="display: flex; align-items: center; color: #fff; text-decoration: none; font-size: 0.99rem; margin: 2px 0;">
+      <svg width="13" height="13" style="margin-right: 0.5rem;"><circle cx="6.5" cy="6.5" r="6.5" fill="#172035"/><polygon points="5,4 10,6.5 5,9" fill="#fff"/></svg>
+      <span class="text-link" style="position: relative; display: inline-block;">Ambalare securizată</span>
+    </a>
+    <a href="Preluare-si-ambalare.html" style="display: flex; align-items: center; color: #fff; text-decoration: none; font-size: 0.99rem; margin: 2px 0;">
+      <svg width="13" height="13" style="margin-right: 0.5rem;"><circle cx="6.5" cy="6.5" r="6.5" fill="#172035"/><polygon points="5,4 10,6.5 5,9" fill="#fff"/></svg>
+      <span class="text-link" style="position: relative; display: inline-block;">Preluare și ambalare</span>
+    </a>
+    <a href="asamblare-manuala.html" style="display: flex; align-items: center; color: #fff; text-decoration: none; font-size: 0.99rem; margin: 2px 0;">
+      <svg width="13" height="13" style="margin-right: 0.5rem;"><circle cx="6.5" cy="6.5" r="6.5" fill="#172035"/><polygon points="5,4 10,6.5 5,9" fill="#fff"/></svg>
+      <span class="text-link" style="position: relative; display: inline-block;">Asamblare manuală</span>
+    </a>
+    <a href="ambalare-cadouri.html" style="display: flex; align-items: center; color: #fff; text-decoration: none; font-size: 0.99rem; margin: 2px 0;">
+      <svg width="13" height="13" style="margin-right: 0.5rem;"><circle cx="6.5" cy="6.5" r="6.5" fill="#172035"/><polygon points="5,4 10,6.5 5,9" fill="#fff"/></svg>
+      <span class="text-link" style="position: relative; display: inline-block;">Ambalare cadouri</span>
+    </a>
+    <a href="de-branding-si-re-branding.html" style="display: flex; align-items: center; color: #fff; text-decoration: none; font-size: 0.99rem; margin: 2px 0;">
+      <svg width="13" height="13" style="margin-right: 0.5rem;"><circle cx="6.5" cy="6.5" r="6.5" fill="#172035"/><polygon points="5,4 10,6.5 5,9" fill="#fff"/></svg>
+      <span class="text-link" style="position: relative; display: inline-block;">Debranding & Rebranding</span>
+    </a>
+    <a href="ambalare-personalizata.html" style="display: flex; align-items: center; color: #fff; text-decoration: none; font-size: 0.99rem; margin: 2px 0;">
+      <svg width="13" height="13" style="margin-right: 0.5rem;"><circle cx="6.5" cy="6.5" r="6.5" fill="#172035"/><polygon points="5,4 10,6.5 5,9" fill="#fff"/></svg>
+      <span class="text-link" style="position: relative; display: inline-block;">Ambalare personalizată</span>
+    </a>
+    <a href="banda-pos.html" style="display: flex; align-items: center; color: #fff; text-decoration: none; font-size: 0.99rem; margin: 2px 0;">
+      <svg width="13" height="13" style="margin-right: 0.5rem;"><circle cx="6.5" cy="6.5" r="6.5" fill="#172035"/><polygon points="5,4 10,6.5 5,9" fill="#fff"/></svg>
+      <span class="text-link" style="position: relative; display: inline-block;">Sigilare POS</span>
+    </a>
+    <a href="pungi-de-plastic.html" style="display: flex; align-items: center; color: #fff; text-decoration: none; font-size: 0.99rem; margin: 2px 0;">
+      <svg width="13" height="13" style="margin-right: 0.5rem;"><circle cx="6.5" cy="6.5" r="6.5" fill="#172035"/><polygon points="5,4 10,6.5 5,9" fill="#fff"/></svg>
+      <span class="text-link" style="position: relative; display: inline-block;">Ambalare în pungi</span>
+    </a>
+    <a href="ambalare-carti.html" style="display: flex; align-items: center; color: #fff; text-decoration: none; font-size: 0.99rem; margin: 2px 0;">
+      <svg width="13" height="13" style="margin-right: 0.5rem;"><circle cx="6.5" cy="6.5" r="6.5" fill="#172035"/><polygon points="5,4 10,6.5 5,9" fill="#fff"/></svg>
+      <span class="text-link" style="position: relative; display: inline-block;">Ambalare cărți</span>
+    </a>
+    <a href="ambalare-cartele-SIM.html" style="display: flex; align-items: center; color: #fff; text-decoration: none; font-size: 0.99rem; margin: 2px 0;">
+      <svg width="13" height="13" style="margin-right: 0.5rem;"><circle cx="6.5" cy="6.5" r="6.5" fill="#172035"/><polygon points="5,4 10,6.5 5,9" fill="#fff"/></svg>
+      <span class="text-link" style="position: relative; display: inline-block;">Ambalare cartele SIM</span>
+    </a>
+  </div>
+</div>
+  <!-- Col 3: Legal and contact -->
+  <div style="flex: 1 1 210px; min-width: 170px; max-width: 300px; text-align: left;">
+    <h2 style="font-size: 1.13rem; font-weight: 700; margin-bottom: 0.7rem;">Informații legale</h2>
+    <a href="../politica_confidentialitate.html" class="underline-link" style="display:inline-block; color:#fff; text-decoration:none; font-size:0.98rem; margin:0.18rem 0; position: relative">POLITICA DE CONFIDENȚIALITATE</a>
+    <a href="../politica_cookie.html" class="underline-link" style="display: inline-block; color:#fff; text-decoration:none; font-size:0.98rem; margin:0.18rem 0; position: relative">POLITICA DE COOKIE-URI</a>
+    <a href="../termeni_si_conditii.html" class="underline-link" style="display:inline-block; color:#fff; text-decoration:none; font-size:0.98rem; margin:0.18rem 0; position: relative">TERMENI ȘI CONDIȚII</a>
+  <div style="flex: 1 1 200px; min-width: 150px; max-width: 220px; text-align: left;margin-top: 0.9rem;">
+    <h2 style="font-size: 1.13rem; font-weight: 700; margin-bottom: 0.7rem;">Contactează-ne</h2>
+    <div style="display: flex; align-items: center; justify-content: left; margin-bottom:0.6rem;">
+  <svg width="18" height="18" viewBox="0 0 24 24" style="margin-right:0.5rem;vertical-align:middle;">
+    <circle cx="12" cy="12" r="12" fill="#172035"/>
+    <path d="M7 9l5 4 5-4M7 9h10v6H7V9z" stroke="#fff" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <a href="mailto:office@simlogistics.ro" class="underline-link" style="color:#fff;text-decoration:none; font-size:0.98rem; position:relative; display:inline-block;">office@simlogistics.ro</a>
+</div>
+<div style="display: flex; align-items: center; justify-content: left;">
+  <svg width="18" height="18" viewBox="0 0 24 24" style="margin-right:0.5rem;vertical-align:middle;">
+    <circle cx="12" cy="12" r="12" fill="#172035"/>
+    <path d="M16 17c-2 0-5-3-5-5l2-2c.3-.3.3-.7 0-1l-2-2c-.3-.3-.7-.3-1 0l-2 2c0 4 5 9 9 9l2-2c.3-.3.3-.7 0-1l-2-2c-.3-.3-.7-.3-1 0l-2 2z" stroke="#fff" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <a href="tel:+40721785632" class="underline-link" style="color:#fff;text-decoration:none; font-size:0.98rem; position:relative; display:inline-block;">0721 785 632</a>
+</div>
+  </div>
+</footer>
+<div style="width:100vw; background:#000; color:#fff; border-top:1px solid #222; text-align:center; font-size:0.97rem; padding:1rem 0 1rem 0; font-family:'Sora',Arial,sans-serif;">
+  Toate drepturile rezervate © SIM Logistics Limited
+</div>
+  <script>
+  // Toggle meniu hamburger mobil
+  function toggleMenu() {
+  const mobileNav = document.querySelector('.mobile-nav');
+  mobileNav.classList.toggle('show');
+  }
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const navbar = document.querySelector('.navbar');
+
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > 10) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+  });
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // Selectează DOAR titlurile, paragrafele, listele etc. (nu butoane din hero)
+  const slideUpEls = Array.from(document.querySelectorAll(
+    "main h1, main h2, main h3, main p, main ul, main li, main a, main button"
+  )).filter(el =>
+    // Exclude orice element care este copil direct în .hero-buttons
+    !el.closest('.hero-buttons')
+  );
+
+  slideUpEls.forEach(el => el.classList.add('slide-up-reveal'));
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  slideUpEls.forEach(el => observer.observe(el));
+});
+</script>
+
+</body>
+</html>
